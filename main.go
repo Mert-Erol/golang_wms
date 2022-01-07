@@ -9,6 +9,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+
+	_ "github.com/mert-erol/golang_wms/models"
 )
 
 var db *sql.DB
@@ -122,7 +124,7 @@ func dashboard(w http.ResponseWriter, r *http.Request) {
 
 	tpl.ExecuteTemplate(w, "dashboard.gohtml", user)
 }
-func dispatch(w http.ResponseWriter, r *http.Request)  {
+func dispatch(w http.ResponseWriter, r *http.Request) {
 
 	file, _, _ := r.FormFile("file")
 
