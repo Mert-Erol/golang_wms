@@ -15,7 +15,7 @@ import (
 
 func Dashboard(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
-		if utils.IsloggedIn(r) == "0" {
+		if utils.IsloggedIn(r) == "0" {	// Auth control. If there is no cookie send the user to the login page
 			http.Redirect(w, r, "/login", http.StatusSeeOther)
 			return
 		}
@@ -63,6 +63,7 @@ func Shelfs(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// Reading csv data
 func AddReceipt(w http.ResponseWriter, r *http.Request) {
 	if utils.IsloggedIn(r) == "0" {
 		http.Redirect(w, r, "/login", http.StatusSeeOther)
@@ -83,7 +84,7 @@ func AddReceipt(w http.ResponseWriter, r *http.Request) {
 	}
 	defer file.Close()
 
-	tempFile, err := ioutil.TempFile("uploads", "upload-*.csv")
+	tempFile, err := ioutil.TempFile("uploads", "upload-*.csv")	// Allow only .csv files and create temp file
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -106,17 +107,18 @@ func ReadCsvFile(FileName string) {
 
 	db = database.ConnectDB()
 
-	records, err := ReadData(FileName)
+	records, err := ReadData(FileName)	// Getting data
 	if err != nil {
 		log.Fatal()
 	}
-	for _, record := range records {
+	for _, record := range records {	// parse data row to row
 		receipt := models.ReceiptDetail{
 			StockCode:       record[0],
 			Quantity:        record[1],
 			TransactionType: 0,
 		}
 
+		// insert data one by one
 		_, err = db.Exec("INSERT INTO transactions(stock_code, quantity, type) VALUES(?, ?, ?)", &receipt.StockCode, &receipt.Quantity, &receipt.TransactionType)
 		if err != nil {
 			fmt.Println(err)

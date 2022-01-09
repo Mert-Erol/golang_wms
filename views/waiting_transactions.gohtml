@@ -1,0 +1,272 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        @font-face {
+            font-family: 'IBM Plex Sans';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/ibmplexsans/v8/zYX9KVElMYYaJe8bpLHnCwDKjXr8AIFsdP3pBms.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        @font-face {
+            font-family: 'IBM Plex Sans';
+            font-style: normal;
+            font-weight: 600;
+            src: url(https://fonts.gstatic.com/s/ibmplexsans/v8/zYX9KVElMYYaJe8bpLHnCwDKjQ76AIFsdP3pBms.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* define native CSS variables here */
+        :root {
+            --color-dark1: #161616;
+            --color-dark2: #262626;
+            --color-dark3: #393939;
+
+            --color-white: rgba(255,255,255);
+            --color-white1: rgba(255,255,255,.75);
+        }
+
+        html, body {
+
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'IBM Plex Sans', Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .app-body {
+
+            /* Two column layout spanning 100 percent of viewport. */
+            display: grid;
+            height: 100vh;
+            grid-template-areas:
+    "app-sidebar-area app-header-area"
+    "app-sidebar-area app-main-area";
+
+            /* Fix width of left column and let right column span complete width */
+            grid-template-columns: 16rem 1fr;
+
+            /* Fix height of top row and let bottom row span complete height */
+            grid-template-rows: 3.5rem 1fr;
+        }
+
+        .app-sidebar {
+
+            display: grid;
+            grid-area: app-sidebar-area;
+            grid-template-areas:
+    "app-logo-area"
+    "app-sidenav-area";
+            grid-template-rows: 3.5rem 1fr;
+
+            font-weight: bold;
+            background-color: var(--color-dark2);
+            color: var(--color-white1);
+
+            padding-bottom: 3rem;
+        }
+
+        .app-header {
+            display: grid;
+            grid-area: app-header-area;
+            grid-template-areas: "app-header-left-menu-area app-header-right-menu-area";
+
+            background-color: var(--color-dark1);
+            color: var(--color-white1);
+
+            align-content: center;
+        }
+
+        .app-main {
+            display: grid;
+            grid-area: app-main-area;
+
+            padding: 1rem 1rem 0 1rem;
+            align-content: start;
+        }
+
+        .app-logo {
+            display: grid;
+            grid-area: app-logo-area;
+
+            color: var(--color-white);
+            background-color: var(--color-dark1);
+
+            align-content: center;
+            padding: 0 1rem;
+        }
+
+        .app-header-left-menu {
+            grid-area: app-header-left-menu-area;
+            justify-self: start;
+        }
+
+        .app-header-right-menu {
+            grid-area: app-header-right-menu-area;
+            justify-self: end;
+        }
+
+        .app-sidenav {
+            display: grid;
+            grid-area: app-sidenav-area;
+            grid-template-areas: ".";
+        }
+
+        /* change the default bootstrap nav-link color */
+        .app-header .nav-link, .app-header .dropdown-item,
+        .app-sidebar .nav-link
+        {
+            color: var(--color-white1);
+        }
+
+        /* change the default bootstrap nav-link hover color, background color */
+        .app-header a:hover,
+        .app-sidebar a:hover
+        {
+            color: var(--color-white);
+            background-color: var(--color-dark3);
+        }
+
+        /* change the default boostrap drop-down menu background color */
+        .app-header .dropdown-menu {
+            background-color: var(--color-dark2);
+        }
+
+        /* let the nested menu items be indented */
+        .app-sidebar ul ul a {
+            padding-left: 2rem !important;
+        }
+
+        /* move the default dropdown caret to the end after link text */
+        .app-sidebar .dropdown-toggle {
+            position: relative;
+        }
+
+        .app-sidebar .dropdown-toggle::after {
+            display: block;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            transition: 0.1s;
+        }
+
+        /* make the top part stay sticky to top while scrolling down to see more content */
+        .app-sidebar {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+
+        .app-header {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            z-index: 1030;
+        }
+
+        /* let the 'main' area be independently scrollable when there is content beyond the viewport */
+        .app-main, .app-sidenav {
+            overflow: auto;
+        }
+
+        /* let the sidebar be independently scrollable when there is content beyond the viewport */
+        .app-main, .app-sidenav {
+            overflow-y: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app-body">
+
+    <aside class="app-sidebar">
+        <div class="app-logo sticky-top">İşlemler</div>
+        <div class="app-sidenav">
+
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Anasayfa</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link dropdown-toggle" href="#releasesSubmenu" data-toggle="collapse" aria-expanded="false">Seçenekler</a>
+                    <ul class="collapse list-unstyled" id="releasesSubmenu">
+                        <li>
+                            <a class="nav-link" href="/receipts">Mal Kabul</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="/orders">Sipariş</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="/waiting_transactions">Bekleyen İşlemler</a>
+                        </li>
+                        <li>
+                            <a class="nav-link" href="/shelfs">Raflar</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </aside>
+
+    <header class="app-header">
+
+
+        <ul class="nav app-header-right-menu">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Çıkış Yap</a>
+            </li>
+        </ul>
+
+
+    </header>
+
+    <main class="app-main">
+        <h1></h1>
+        <p>
+
+        <form style="width: 50%;margin-left: 25%;margin-right: 25%" method="POST" action="/shelfs" >
+            <div class="form-group">
+                <label>Raf Adı</label>
+                <input type="text" class="form-control" name="shelf_name" placeholder="Raf Adı">
+            </div>
+            <div class="form-group">
+                <label >Raf Kapasitesi</label>
+                <input type="number" class="form-control-file" name="shelf_capacity">
+            </div>
+            <div class="btn">
+                <button type="submit" id="register_button">Kayıt Ol</button>
+            </div>
+        </form>
+
+        </p>
+
+    </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
+</html>

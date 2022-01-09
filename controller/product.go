@@ -6,13 +6,14 @@ import (
 	"net/http"
 )
 
+// Product create operation
 func AddProduct(w http.ResponseWriter, r *http.Request) {
-	if r.Method != "POST" {
+	if r.Method != "POST" {	// Checking if request is POST
 		http.ServeFile(w, r, "views/products.gohtml")
 		return
 	}
 
-	db = database.ConnectDB()
+	db = database.ConnectDB()	// Connect to DB
 
 	productName := r.FormValue("product_name")
 	stockCode := r.FormValue("stock_code")
