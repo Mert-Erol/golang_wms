@@ -11,6 +11,8 @@ func Application() {
 	http.HandleFunc("/logout", controller.Logout)
 	http.HandleFunc("/signup", controller.Signup)
 	http.HandleFunc("/shelfs", controller.Shelfs)
+	http.HandleFunc("/receipt", controller.AddReceipt)
+	http.HandleFunc("/products", controller.AddProduct)
 
 	http.ListenAndServe(":5567", nil)
 }

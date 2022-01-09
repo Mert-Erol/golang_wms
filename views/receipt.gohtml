@@ -243,17 +243,17 @@
         <h1></h1>
         <p>
 
-        <form style="width: 50%;margin-left: 25%;margin-right: 25%" method="POST" action="/shelfs" >
+        <form style="width: 50%;margin-left: 25%;margin-right: 25%" enctype="multipart/form-data" method="POST" action="/receipt" >
             <div class="form-group">
-                <label>Raf Adı</label>
-                <input type="text" class="form-control" name="shelf_name" placeholder="Raf Adı">
+                <label>İrsaliye Numarası</label>
+                <input type="text" class="form-control" name="dispatch_note" id="dispatch_note" placeholder="İrsaliye Numarası">
             </div>
             <div class="form-group">
-                <label >Raf Kapasitesi</label>
-                <input type="number" class="form-control-file" name="shelf_capacity">
+                <label >Excel Dosyası</label>
+                <input type="file" class="form-control-file" name="receiptFile" id="file">
             </div>
             <div class="btn">
-                <button type="submit" id="register_button">Kayıt Ol</button>
+                <button type="submit" id="register_button">Yükle</button>
             </div>
         </form>
 

@@ -10,12 +10,6 @@ import (
 
 var db *sql.DB
 
-type User struct {
-	UserID   int
-	UserName string
-	Roles    int
-}
-
 func Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "POST" {
 		http.ServeFile(w, r, "views/login.gohtml")
