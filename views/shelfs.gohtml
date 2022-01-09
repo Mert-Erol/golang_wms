@@ -255,14 +255,17 @@
         <h1></h1>
         <p>
 
-        <form style="width: 50%;margin-left: 25%;margin-right: 25%" method="POST" action="/dispatch" >
+        <form style="width: 50%;margin-left: 25%;margin-right: 25%" method="POST" action="/shelfs" >
             <div class="form-group">
-                <label>İrsaliye Numarası</label>
-                <input type="text" class="form-control" name="dispatch_note" id="dispatch_note" placeholder="İrsaliye Numarası">
+                <label>Raf Adı</label>
+                <input type="text" class="form-control" name="shelf_name" placeholder="Raf Adı">
             </div>
             <div class="form-group">
-                <label >Excel Dosyası</label>
-                <input type="file" class="form-control-file" name="file" id="file">
+                <label >Raf Kapasitesi</label>
+                <input type="number" class="form-control-file" name="shelf_capacity">
+            </div>
+            <div class="btn">
+                <button type="submit" id="register_button">Kayıt Ol</button>
             </div>
         </form>
 
